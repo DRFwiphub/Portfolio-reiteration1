@@ -1,0 +1,14 @@
+.container{
+    border-color: blueviolet;
+}
+.banner{
+    border-color: aquamarine;
+}
+.content{
+    border-color: blue;
+}
+.container .banner .content{
+    margin: 2px;
+    padding: 2px;
+    border: 2px solid;
+}
