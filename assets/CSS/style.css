@@ -1,32 +1,74 @@
 .container{
-	/* enable flex layout */
 	display: flex;
-	/* change to row for side-by-side, or column for stacked */
 	flex-direction: column;
 	gap: 12px;
 	align-items: stretch;
-	text-align: left;
-	/* visible container border for debugging */
+	text-align: center;
 	border: 2px solid blueviolet;
 	padding: 8px;
 }
 .banner{
-	/* visible banner box */
 	flex: 1 1 200px;
 	border: 2px solid aquamarine;
 	padding: 8px;
 	background: rgba(127, 255, 212, 0.12);
 }
 .content{
-	/* visible content box */
 	flex: 2 1 400px;
 	border: 2px solid blue;
 	padding: 12px;
 	background: rgba(240, 248, 255, 0.12);
 }
 
-/* target the banner and content that are direct children of .container */
 .container > .banner,
 .container > .content{
 	margin: 2px;
+}
+nav{
+    border: solid 2px black;
+}
+a{
+    padding: 12px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;  
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.gallery-item {
+    aspect-ratio: 1;  
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+}
+
+@media (min-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);  
+    }
+}
+
+@media (min-width: 900px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);  
+    }
+}
+
+@media (min-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+		max-inline-size: 1400px;
+        margin: 0 auto;
+    }
 }
