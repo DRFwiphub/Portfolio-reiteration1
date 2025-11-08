@@ -1,30 +1,130 @@
-// Get all gallery images instead of just one
-const galleryImages = document.querySelectorAll(".gallery-item img");
-const modalCont = document.getElementById('modal-container');
-const modalImg = document.getElementById('modalImage');
-const closeBtn = document.getElementById('closeBtn');
+import { galleryArray } from "./imagearray.js";
 
-if (modalCont && modalImg && closeBtn) {
-    // Add click handlers to all gallery images
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            modalCont.classList.add('modal-open'); // Changed class name to modal-open
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-        });
+export function initProjectGallery({ galleryArray, containerSelector = '.gallery-grid' } = {}) {
+  if (!Array.isArray(galleryArray) || galleryArray.length === 0) {
+    console.warn('initProjectGallery: galleryArray is empty or not provided.');
+    return;
+  }
+
+  // Find the intended container
+  const container = document.querySelector(containerSelector) || document.querySelector('.gallery-grid');
+  if (!container) {
+    console.warn('initProjectGallery: gallery container not found.');
+    return;
+  }
+
+  // DOM refs for modal
+  const modal = document.getElementById('galleryModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalPrev = document.getElementById('modalPrev');
+  const modalNext = document.getElementById('modalNext');
+  const modalClose = document.getElementById('modalClose');
+  const modalCaption = document.getElementById('modalCaption');
+
+  // Track which project and image is open
+  let currentProject = 0;
+  let currentImage = 0;
+
+  // Helper: show image by project and image index
+  function showImage(projectIdx, imageIdx) {
+    const project = galleryArray[projectIdx];
+    if (!project) return;
+    const images = project.images;
+    imageIdx = Math.max(0, Math.min(imageIdx, images.length - 1));
+    const data = images[imageIdx];
+    modalImg.src = data.src;
+    modalImg.alt = data.alt || '';
+    modalCaption.textContent = project.name + (data.alt ? ' - ' + data.alt : '');
+    currentProject = projectIdx;
+    currentImage = imageIdx;
+
+    modalPrev.classList.toggle('hidden', imageIdx === 0);
+    modalNext.classList.toggle('hidden', imageIdx === images.length - 1);
+  }
+
+  function openModalAt(projectIdx, imageIdx = 0) {
+    showImage(projectIdx, imageIdx);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    modalClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    modalImg.src = '';
+  }
+
+  // Build one .gallery-item per project (show first image as thumbnail)
+  container.innerHTML = '';
+  galleryArray.forEach((project, i) => {
+    const img = document.createElement('img');
+    img.className = 'gallery-item';
+    img.src = project.images[0].src;
+    img.alt = project.name + ' - Thumbnail';
+    img.setAttribute('data-project', i);
+    img.tabIndex = 0;
+    container.appendChild(img);
+  });
+
+  // Attach click/keyboard listeners to all .gallery-item elements
+  container.querySelectorAll('.gallery-item').forEach(el => {
+    el.addEventListener('click', (e) => {
+      const projectIdx = Number(el.getAttribute('data-project')) || 0;
+      openModalAt(projectIdx, 0);
     });
-
-    // Close modal when clicking X button
-    closeBtn.onclick = () => {
-        modalCont.classList.remove('modal-open');
-        modalImg.src = '';
-    };
-
-    // Close modal when clicking outside the image
-    modalCont.addEventListener('click', (e) => {
-        if (e.target === modalCont) {
-            modalCont.classList.remove('modal-open');
-            modalImg.src = '';
-        }
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const projectIdx = Number(el.getAttribute('data-project')) || 0;
+        openModalAt(projectIdx, 0);
+      }
     });
+  });
+
+  // Modal controls
+  modalPrev.addEventListener('click', () => {
+    if (currentImage > 0) showImage(currentProject, currentImage - 1);
+  });
+  modalNext.addEventListener('click', () => {
+    const project = galleryArray[currentProject];
+    if (currentImage < project.images.length - 1) showImage(currentProject, currentImage + 1);
+  });
+  modalClose.addEventListener('click', closeModal);
+
+  // click outside content to close
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // keyboard navigation when modal is open
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'ArrowLeft' && currentIndex > 0) { showImage(currentIndex - 1); return; }
+    if (e.key === 'ArrowRight' && currentIndex < galleryArray.length - 1) { showImage(currentIndex + 1); return; }
+  });
+
+  // Preload images for smoother navigation (optional: can be omitted)
+  galleryArray.forEach(project => {
+    project.images.forEach(img => {
+      const pre = new Image();
+      pre.src = img.src;
+    });
+  });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
