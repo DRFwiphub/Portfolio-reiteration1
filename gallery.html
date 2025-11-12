@@ -33,15 +33,74 @@
                 <div class="gallery-item">Item 4</div>
                 <div class="gallery-item">Item 5</div>
             </div>
-             <div class="modal" id="modal-container">
-               <div class="modal-content">
-                  <button class="close-btn" id="closeBtn">&times;</button>
-                  <img id="modalImage" src="" alt="Enlarged Image">
-               </div>
-            </div>
+             <div class="modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" role="document">
+      <button id="modalClose" class="close-btn" aria-label="Close (Esc)">✕</button>
+      <button id="modalPrev" class="nav-btn prev" aria-label="Previous image">◀</button>
+
+      <img id="modalImage" src="" alt="" />
+
+      <button id="modalNext" class="nav-btn next" aria-label="Next image">▶</button>
+      <div id="modalCaption" class="caption"></div>
+    </div>
+  </div>
+</div>
          </div>
       </div>
    </body>
    <script src ="assets/JavaScript/script.js"></script>
-   <script src="assets/JavaScript/gallery.js"></script>
+   <script src="assets/JavaScript/gallery.js" type="module"></script>
+   <script src="assets/JavaScript/imagearray.js" type="module"></script>
+
+   <script type="module">
+    import { galleryArray } from '/assets/JavaScript/imagearray.js';
+    import { initProjectGallery } from '/assets/JavaScript/gallery.js';
+
+    // init the gallery with the exported array
+    initProjectGallery({ galleryArray, containerSelector: '.gallery-grid#project' });
+  </script>
 </html>
+<!--
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery Popup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>My Project Gallery</h1>
+  container with both class and id as you described 
+  <div class="gallery-grid" id="project">
+    You may pre-render thumbnails here, or let the script render them.
+         Example thumbnails (you can remove if you want script to render dynamically):
+    
+    <img class="gallery-item" data-index="0" src="..." alt="...">
+    -->
+
+
+  <!-- Modal (keeps in DOM, hidden until opened) 
+  <div class="modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" role="document">
+      <button id="modalClose" class="close-btn" aria-label="Close (Esc)">✕</button>
+      <button id="modalPrev" class="nav-btn prev" aria-label="Previous image">◀</button>
+
+      <img id="modalImage" src="" alt="" />
+
+      <button id="modalNext" class="nav-btn next" aria-label="Next image">▶</button>
+      <div id="modalCaption" class="caption"></div>
+    </div>
+  </div>
+
+Load module and initialize gallery 
+  <script type="module">
+    import { galleryArray } from './images.js';
+    import { initProjectGallery } from './script.js';
+
+    // init the gallery with the exported array
+    initProjectGallery({ galleryArray, containerSelector: '.gallery-grid#project' });
+  </script>
+</body>
+</html>-->

@@ -179,3 +179,93 @@ a{
 .close-btn:hover {
     background: #ff8533;
 }
+
+/* Basic page */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 20px;
+  background: #fafafa;
+  color: #111;
+}
+
+/* gallery grid - simple responsive layout */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  max-inline-size: 1000px;
+  margin-block-start: 16px;
+}
+
+.gallery-item {
+  inline-size: 100%;
+  block-size: 140px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal.open { display: flex; }
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  max-inline-size: 95%;
+  max-block-size: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content img {
+  max-inline-size: 100%;
+  max-block-size: 80vh;
+  border-radius: 6px;
+  display: block;
+}
+
+/* Buttons */
+.close-btn,
+.nav-btn {
+  position: absolute;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
+.close-btn { inset-block-start: 10px; inset-inline-end: 10px; }
+.prev { inset-inline-start: 12px; inset-block-start: 50%; transform: translateY(-50%); }
+.next { inset-inline-end: 12px; inset-block-start: 50%; transform: translateY(-50%); }
+
+/* utility hide */
+.hidden { display: none !important; }
+
+.caption {
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-start: 16px;
+  inset-inline-end: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #222;
+}
