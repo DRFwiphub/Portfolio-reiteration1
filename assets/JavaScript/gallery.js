@@ -42,17 +42,22 @@ export function initProjectGallery({ galleryArray, containerSelector = '.gallery
     modalNext.classList.toggle('hidden', imageIdx === images.length - 1);
   }
 
+  function openModal() {
+    if (!modal) return;
+    document.body.classList.add('modal-open');
+    modal.classList.add('open');
+    // put focus on close button
+  }
+
   function openModalAt(projectIdx, imageIdx = 0) {
     showImage(projectIdx, imageIdx);
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    modalClose.focus();
+    openModal();
   }
 
   function closeModal() {
+    if (!modal) return;
     modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    modalImg.src = '';
+    document.body.classList.remove('modal-open');
   }
 
   // Build one .gallery-item per project (show first image as thumbnail)
