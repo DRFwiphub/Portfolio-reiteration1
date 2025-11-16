@@ -96,6 +96,7 @@ a{
     box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
     z-index: 10;
     position: relative;
+    transition: all 0.3s ease-in-out;
 }
 
 .clicked-image img {
@@ -269,3 +270,8 @@ body {
   font-size: 14px;
   color: #222;
 }
+
+body.modal-open { overflow: hidden; }
+body.modal-open .site-main { filter: blur(2px); pointer-events: none; user-select: none; }
+.modal { display:none; /* show via .open */ }
+.modal.open { display:flex; }
