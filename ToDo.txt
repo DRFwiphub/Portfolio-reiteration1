@@ -1,0 +1,7 @@
+Responsive NavBar
+Image control for gallery(html, CSS, JS)
+import/export DOM elements
+cosemetics
+content
+contact form + functionality
+readME

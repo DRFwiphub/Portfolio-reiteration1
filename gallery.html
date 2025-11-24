@@ -10,94 +10,59 @@
       <title>gallery</title>
    </head>
    <body>
-      <div class="container">
-         <div class="banner">
-         </div>
-         <div class="content">
-            <nav>
-                <a href="index.html">Home</a> |
-                <a href="about.html">About Me</a> |
-                <a href="gallery.html">Gallery</a> |
-                <a href="contact.html">Contact Me</a>
+      <header class="header">
+         <div class="header__content">
+            <a href="#" class="logo">
+            <img class="logo__img" src="#" alt="logo">
+            </a>
+            <nav class="nav">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a class="nav__link" href="index.html">Home</a>
+                  </li>
+                  <li class="nav__item">
+                     <a class="nav__link" href="about.html">About Me</a> |
+                  </li>
+                  <li class="nav__item">
+                     <a class="nav__link" href="gallery.html">Gallery</a> 
+                  </li>
+                  <li class="nav__item">
+                     <a class="btn" href="contact.html">Contact Me</a>
+                  </li>
+               </ul>
             </nav>
+         </div>
+      </header>
+      <div class="container">
+         <div class="content">
             <h1>Welcome to my gallery Page!</h1>
-              <section>
+            <section>
                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo id nulla quis convallis. Phasellus scelerisque ullamcorper quam sed luctus. Nam lacus justo, tincidunt ut sem ut, scelerisque maximus nunc. Nam nisl elit, facilisis ac justo non, vehicula fermentum felis. Curabitur mattis sit amet mi ut dictum. Donec sit amet imperdiet magna, id semper tellus. Quisque ipsum leo, porta id volutpat non, mollis et urna. Morbi non fermentum nibh. Vestibulum mattis consequat odio eleifend pellentesque. Nullam non porttitor felis. Proin a turpis ac arcu bibendum elementum.</p>
                <p>Aliquam eget congue sapien. Cras placerat velit vel nisl consequat finibus. Aliquam posuere diam nec nisl eleifend blandit. Morbi accumsan, velit et vulputate iaculis, dolor augue dignissim leo, eu eleifend sapien metus eget ipsum. Sed sagittis, odio non consequat commodo, arcu ligula commodo nulla, id iaculis neque justo gravida quam. Vivamus et tempus nulla. Etiam mattis sem vitae convallis malesuada. Nulla eu iaculis risus, id bibendum nisi. Ut eu ligula ante. Suspendisse interdum orci dignissim, condimentum erat vel, efficitur sapien. Duis nec lacus justo. Nunc tempor pharetra turpis quis interdum. In cursus aliquam feugiat. Nullam mollis quam eu dui imperdiet posuere. Duis eleifend augue ante, vitae imperdiet ligula dignissim sit amet.</p>
                <p>Sed aliquam dui leo, sed consectetur nunc molestie vel. Integer tellus mauris, scelerisque ut erat id, sodales cursus est. Donec ullamcorper tristique nulla, id rutrum nulla sollicitudin ac. Etiam blandit eget mi vitae convallis. Integer vulputate euismod odio at egestas. Etiam id vestibulum velit. Ut quis ipsum nunc. Suspendisse lobortis imperdiet lacus a commodo. Vivamus molestie nunc augue, porta facilisis justo dapibus sed. Integer ligula lorem, volutpat vel rhoncus id, mattis eget nibh.</p>
             </section>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="assets/images/Screenshot 2025-11-05 213629.jpg" alt="image 1" id="project"></div>
-
+               <div class="gallery-item"><img src="assets/images/Screenshot 2025-11-05 213629.jpg" alt="image 1" id="project"></div>
             </div>
-             <div class="modal" id="galleryModal" role="dialog" >
-    <div class="modal-content" role="document">
-      <button id="modalClose" class="close-btn" aria-label="Close (Esc)">✕</button>
-      <button id="modalPrev" class="nav-btn prev" aria-label="Previous image">◀</button>
-
-      <img id="modalImage" src="" alt="" />
-
-      <button id="modalNext" class="nav-btn next" aria-label="Next image">▶</button>
-      <div id="modalCaption" class="caption"></div>
-    </div>
-  </div>
-</div>
+            <div class="modal" id="galleryModal" role="dialog" >
+               <div class="modal-content" role="document">
+                  <button id="modalClose" class="close-btn" aria-label="Close (Esc)">✕</button>
+                  <button id="modalPrev" class="nav-btn prev" aria-label="Previous image">◀</button>
+                  <img id="modalImage" src="" alt="" />
+                  <button id="modalNext" class="nav-btn next" aria-label="Next image">▶</button>
+                  <div id="modalCaption" class="caption"></div>
+               </div>
+            </div>
          </div>
+      </div>
       </div>
    </body>
    <script src ="assets/JavaScript/script.js"></script>
    <script src="assets/JavaScript/gallery.js" type="module"></script>
    <script src="assets/JavaScript/imagearray.js" type="module"></script>
-
    <script type="module">
-    import { galleryArray } from '/assets/JavaScript/imagearray.js';
-    import { initProjectGallery } from '/assets/JavaScript/gallery.js';
-
-    // init the gallery with the exported array
-    initProjectGallery({ galleryArray, containerSelector: '.gallery-grid#project' });
-  </script>
+      import { galleryArray } from '/assets/JavaScript/imagearray.js';
+      import { initProjectGallery } from '/assets/JavaScript/gallery.js';
+      initProjectGallery({ galleryArray, containerSelector: '.gallery-grid#project' });
+   </script>
 </html>
-<!--
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gallery Popup</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-  <h1>My Project Gallery</h1>
-  container with both class and id as you described 
-  <div class="gallery-grid" id="project">
-    You may pre-render thumbnails here, or let the script render them.
-         Example thumbnails (you can remove if you want script to render dynamically):
-    
-    <img class="gallery-item" data-index="0" src="..." alt="...">
-    -->
-
-
-  <!-- Modal (keeps in DOM, hidden until opened) 
-  <div class="modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-content" role="document">
-      <button id="modalClose" class="close-btn" aria-label="Close (Esc)">✕</button>
-      <button id="modalPrev" class="nav-btn prev" aria-label="Previous image">◀</button>
-
-      <img id="modalImage" src="" alt="" />
-
-      <button id="modalNext" class="nav-btn next" aria-label="Next image">▶</button>
-      <div id="modalCaption" class="caption"></div>
-    </div>
-  </div>
-
-Load module and initialize gallery 
-  <script type="module">
-    import { galleryArray } from './images.js';
-    import { initProjectGallery } from './script.js';
-
-    // init the gallery with the exported array
-    initProjectGallery({ galleryArray, containerSelector: '.gallery-grid#project' });
-  </script>
-</body>
-</html>-->

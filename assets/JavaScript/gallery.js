@@ -1,4 +1,5 @@
 import { galleryArray } from "./imagearray.js";
+import { modal, modalCaption, modalClose, modalImg, modalNext, modalPrev } from "./domElements.js"; 
 
 export function initProjectGallery({ galleryArray, containerSelector = '.gallery-grid' } = {}) {
   if (!Array.isArray(galleryArray) || galleryArray.length === 0) {
@@ -13,13 +14,7 @@ export function initProjectGallery({ galleryArray, containerSelector = '.gallery
     return;
   }
 
-  // DOM refs for modal
-  const modal = document.getElementById('galleryModal');
-  const modalImg = document.getElementById('modalImage');
-  const modalPrev = document.getElementById('modalPrev');
-  const modalNext = document.getElementById('modalNext');
-  const modalClose = document.getElementById('modalClose');
-  const modalCaption = document.getElementById('modalCaption');
+
 
   // Track which project and image is open
   let currentProject = 0;
